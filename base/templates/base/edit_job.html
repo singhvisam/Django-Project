@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f4f4f4; /* Set background color for the entire webpage */
+      }
+      .combine_edit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 450px; /* Increase the width of the container */
+        padding: 20px;
+        background-color: #fff; /* Set background color for the container */
+        border: 1px solid #ccc;
+        border-radius: 10px; /* Increase border radius for a rounded appearance */
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* Add a box shadow for a nice effect */
+      }
+      .form-group {
+        margin: 10px 0;
+      }
+      .form-control {
+        width: 100%;
+        padding: 15px; /* Increase padding to make input boxes larger */
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9; /* Set background color for input boxes */
+      }
+      .btn {
+        width: 100%;
+        padding: 15px; /* Increase padding for the button */
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer; /* Add a pointer cursor on hover */
+      }
+      .btn:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="combine_edit">
+      <form method="post" action="{% url 'edit_in_mongo' %}">
+        {% csrf_token %}
+        <div class="form-group">
+          <label for="formGroupExampleInput">Title</label>
+          <input
+            class="form-control"
+            id="disabledInput"
+            type="text"
+            placeholder="{{title}}"
+            disabled
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="hidden"
+            class="form-control"
+            placeholder="Title"
+            aria-label="Title"
+            name="title"
+            value="{{title}}"
+          />
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Skills</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Skills"
+            aria-label="Skills"
+            name="skills"
+          />
+        </div>
+        <div class="form-group">
+          <label for="formGroupExampleInput2">Salary</label>
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Salary"
+            aria-label="Salary"
+            name="salary"
+          />
+        </div>
+        <div class="form-group">
+          <button class="btn" type="submit">Edit</button>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

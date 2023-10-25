@@ -1,0 +1,51 @@
+{% extends 'main.html' %} {% block content %}
+<style>
+  /* Page background color */
+  body {
+    background-color: #f5f5f5; /* Light gray background */
+  }
+
+  /* Text color for the heading */
+  h1 {
+    color: #333; /* Dark gray text color */
+  }
+
+  /* Text color for the description */
+  .lead {
+    color: #555; /* Slightly lighter gray text color */
+  }
+
+  /* Text color for the "Search" button */
+  .btn-secondary {
+    background-color: #3498db; /* Blue background color */
+    color: #fff; /* White text color */
+  }
+</style>
+
+<div class="container">
+  <div class="text-center my-5">
+    <h1>{{ title|default:"MakeMyJobsEasy" }}</h1>
+    <p class="lead">We are here to make your jobs searching a cakewalk.....</p>
+  </div>
+
+  <form
+    class="form-inline justify-content-center"
+    method="post"
+    action="{% url 'search_job' %}"
+  >
+    {% csrf_token %}
+    <div class="input-group mb-3">
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Search"
+        aria-label="Search"
+        name="searched"
+      />
+      <div class="input-group-append">
+        <button class="btn btn-secondary" type="submit">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+{% endblock content %}

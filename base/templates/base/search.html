@@ -1,0 +1,95 @@
+{% extends 'main.html' %} {% block content %}
+<style>
+  /* Page background color */
+  body {
+    background-color: #e9f7ef; /* Light green background */
+  }
+
+  /* Card background color and styling */
+  .job {
+    border: 1px solid #3498db; /* Light blue border */
+    background-color: #ffffff; /* White background for cards */
+    border-radius: 5px; /* Subtle border radius */
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2); /* Subtle box shadow */
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    padding-left: 10px;
+    align-self: center;
+  }
+</style>
+<center>
+  <h2 id="displayValue">Search Results</h2>
+
+  <div class="container">
+    <div class="row">
+      {% for post in jobs %} {% if searched in post.title %}
+      <div class="col-md-4">
+        <div class="card border-light mb-3 job">
+          <div
+            class="card-header"
+            style="background-color: #3498db; color: #fff"
+          >
+            {{post.title}}
+          </div>
+          <div class="card-body">
+            <h5 class="card-title">{{post.salary}}</h5>
+            <p class="card-text"><b>Skills: </b>{{post.skills}}.</p>
+          </div>
+          <div class="buttons">
+            <form
+              class="form-inline my-2 my-lg-0"
+              method="post"
+              action="{% url 'delete_job' post.title %}"
+            >
+              {% csrf_token %}
+              <button
+                class="btn btn-outline-secondary my-2 my-sm-0"
+                type="submit"
+                style="background-color: #3498db; color: #fff"
+              >
+                Delete
+              </button>
+            </form>
+            <form
+              class="form-inline my-2 my-lg-0"
+              method="post"
+              action="{% url 'edit_job' %}"
+            >
+              {% csrf_token %}
+              <button
+                class="btn btn-outline-secondary my-2 my-sm-0"
+                type="submit"
+                style="background-color: #3498db; color: #fff"
+              >
+                <input
+                  type="hidden"
+                  class="form-control"
+                  placeholder="Title"
+                  aria-label="title"
+                  name="title"
+                  value="{{ post.title }}"
+                />
+                Edit
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+      {% endif %} {% endfor %}
+    </div>
+  </div>
+  <form
+    class="form-inline my-2 my-lg-0"
+    method="post"
+    action="{% url 'home' %}"
+  >
+    {% csrf_token %}
+    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">
+      Go back to search
+    </button>
+  </form>
+</center>
+{% endblock content %}
